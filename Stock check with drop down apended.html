@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+                 background-image: url("bg1.jpg");
+                 background-repeat: no-repeat; 
+                 background-size:cover;
+                }
+    .container{
+        display:flex;
+        flex-direction:column;
+        justify-content: center;
+        align-items: center;
+        height:90vh;
+
+    }
+    .test{
+        display:flex;
+        flex-direction:column;
+        justify-content: center;
+        align-items: center;
+        /* background-color: aqua; */
+        width: 600px;
+        height: 600px;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+    #btn1,#box1,#box2{
+        margin-top: 20px;
+        font-size: x-large;
+        font-weight: 200;
+        width: 200px;
+        text-align: center;
+        background-color:darkorange;
+
+    
+    }
+
+    #demo{
+        /* display: flex;
+        align-items: center;
+        justify-content: center; */
+        font-size: x-large;
+        font-weight: 300;
+        border: 3px solid black;
+        background-color:darkorange; 
+        
+    }
+   
+    table, th, td {
+  border:1px solid black;
+}
+
+td,th {
+  text-align: center;
+}
+
+
+</style>
+<body>
+    <div class="container">
+        <h1>Grocery Items</h1>
+        <div class="test">
+            <table style="width:50%">
+                <tr>
+                    <th>Items</th>
+                    <th>Stock in Qty</th>
+                </tr>
+                <tr>
+                    <td>Milk</td>
+                    <td>10 Ltr</td>
+                </tr>
+                <tr>
+                    <td>Cream</td>
+                    <td>20 kg</td>
+                </tr>
+                <tr>
+                    <td>Ghee</td>
+                    <td>30 Ltr</td>
+                </tr>
+                <tr>
+                    <td>Bread</td>
+                    <td>30 Pieces</td>
+                </tr>
+                <tr>
+                    <td>Colgate</td>
+                    <td>50 Pieces</td>
+                </tr>
+                <tr>
+                    <td>Chloclate</td>
+                    <td>60 Pieces</td>
+                </tr>
+
+            </table>
+            
+            <select  id="box1">
+                <option>Choose a Item</option>
+            </select>
+
+            <select  id="box2">
+                <option>Choose a qty</option>
+            </select>
+    
+    
+            <!-- <input type=input id="box1">item No</input> -->
+            <!-- <input type=input id="box2" placeholder="Item Qty"></input> -->
+            <button type="button" id="btn1">Buy</button>
+            
+                <p id="demo"></p>
+            
+        </div>
+    </div>
+</body>
+<script>
+    
+    let inputbox1=document.getElementById("box1");
+    let inputbox2=document.getElementById("box2");
+    let btn1=document.getElementById("btn1");
+    let itemno=[101,102,103,104,105,106];
+     let itemname=["Milk","cream","Ghee","Bread","colgate","choclate"];
+     for ( i = 0; i < itemname.length; i++) {
+     var opt = itemname[i];
+     var el = document.createElement("option");
+     el.textContent = opt;
+      el.value = opt;
+     inputbox1.appendChild(el);
+     }
+     let price=[41,50,500,600,700,800];
+     let stock=[10,20,30,40,50,60];
+     for ( j = 0; j < stock.length; j++) {
+     var opt1 = stock[j];
+     var el1 = document.createElement("option");
+     el1.textContent = opt1;
+      el1.value = opt1;
+     inputbox2.appendChild(el1);
+     }
+
+     
+
+    btn1.onclick=handler;
+
+    function handler(){
+        // let no=itemno.toString();
+        // console.log(no);
+        // let checkstock=stock.toString();
+        let inputvalue1=inputbox1.value;
+        // console.log(inputvalue1);
+        let inputvalue2=parseInt(inputbox2.value);
+        //  let a=itemno.indexOf(inputvalue1);
+        //  console.log(a);
+           let itemname1="";
+
+        for (i=0;i<=itemname.length;i++){
+        
+            // console.log(itemno[i]);
+            if(inputvalue1==itemname[i]&&inputvalue2<=stock[i]){
+                let qty=inputvalue2;
+                let finalprice=qty*price[i];
+                 let itemname1=itemname[i];
+                console.log(itemname1);
+                console.log(finalprice);
+                document.getElementById("demo").innerHTML=" Item you have selected is in Stock and item Name is " +itemname1 + " item Price is Rs " + finalprice + "/-";
+                break;
+                }
+                
+
+            if(inputvalue2>stock[i]){
+                    console.log("Abhi");
+                    itemname1=itemname[i];
+
+                     document.getElementById("demo").innerHTML= itemname1+  " Item  is Out of Stock";  
+                }  
+    }
+
+}
+
+</script>
+</html>
